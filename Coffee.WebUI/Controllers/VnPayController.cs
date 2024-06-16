@@ -293,7 +293,7 @@ namespace Coffee.WebUI.Controllers
 
             var createPaymentResult = await _payOS.createPaymentLink(paymentData);
 
-            return Redirect(createPaymentResult.paymentLinkId);
+            
         }
     }
 }
