@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 using Coffee.DATA.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
+using Net.payOS;
 
 
 namespace Coffee.WebUI
@@ -69,6 +70,10 @@ namespace Coffee.WebUI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            PayOS payOS = new PayOS(builder.Configuration["Environment:PAYOS_CLIENT_ID"] ?? throw new Exception("Cannot find environment"),
+                                    builder.Configuration["Environment:PAYOS_API_KEY"] ?? throw new Exception("Cannot find environment"),
+                                    builder.Configuration["Environment:PAYOS_CHECKSUM_KEY"] ?? throw new Exception("Cannot find environment"));
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
